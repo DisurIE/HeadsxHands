@@ -11,12 +11,12 @@ namespace HeadsxHands
         private int _attack;
         private int _protection;
         private int _health;
-        private int _damage;
+        private Tuple<int, int> _damage;
         private int _maxHealth;
 
         private int _amountOfHealing = 4;
         private bool _isDead = false;
-        public int Damage { get { return _damage; } }
+        public Tuple<int, int> Damage { get { return _damage; } }
 
         public bool IsDead
         {
@@ -106,23 +106,26 @@ namespace HeadsxHands
             this.Protection = 1;
             this._health = 1;
             this._maxHealth = this._health;
-            this._damage = 1;
+            this._damage = new Tuple<int, int>(1, 6);
         }
 
-        public Entity(int attack, int protection, int health, int damage)
+        public Entity(int attack, int protection, int health, int minDamage, int maxDamage)
         {
             this.Attack = attack;
             this.Protection = protection;
             this._health = health;
             this._maxHealth = this._health;
-            this._damage = damage;
+            this._damage = new Tuple<int, int>(minDamage, maxDamage);
         }
 
         public void Died()
         {
             this._isDead = true;
         }
+        public void AttackEnemy(Entity enemy)
+        {
 
+        }
         public void Heal()
         {
             this.Health = (int)(this._maxHealth * 0.3);
