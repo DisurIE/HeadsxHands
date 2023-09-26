@@ -83,9 +83,9 @@ namespace HeadsxHands
 
         public Entity()
         {
-            this.Attack = 1;
-            this.Protection = 1;
-            this._health = 1;
+            this.Attack = Constants.MinAttack;
+            this.Protection = Constants.MinProtection;
+            this._health = Constants.StandartHealth;
             this.maxHealth = this._health;
             this.Damage = (1, 2);
         }

@@ -9,6 +9,10 @@ namespace HeadsxHands
     static class Constants
     {
         public const int MaxHealth = 4;
-        public const int SpeedOfLight = 300000; // km per sec.
+        public const int MinAttack = 1;
+        public const int MaxAttack = 30;
+        public const int MinProtection = 1;
+        public const int MaxProtection = 30;
+        public const int StandartHealth = 100;
     }
 }
