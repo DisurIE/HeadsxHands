@@ -13,7 +13,7 @@ namespace HeadsxHands
         private int _health;
         public (int Min, int Max) Damage { get; }
 
-        private readonly int _maxHealth = Constants.MaxHealth;
+        public readonly int maxHealth = Constants.MaxHealth;
         private int _amountOfHealing = 4;
 
         public int Attack
@@ -26,15 +26,8 @@ namespace HeadsxHands
             set
             {
                 if (value > 0 && value < 31)
-                    {
-                    try
-                    {
-                        _attack = value;
-                    }
-                    catch
-                    {
-                        _attack = 1;
-                    }
+                {
+                    _attack = value;
                 }
                 else
                 {
@@ -79,11 +72,9 @@ namespace HeadsxHands
 
             set
             {
-                if (IsAlive())
-                {
-                    _health = value;
-                }
-                else
+                _health = value;
+
+                if (!IsAlive())
                 {
                     _health = 0;
                 }
@@ -95,17 +86,17 @@ namespace HeadsxHands
             this.Attack = 1;
             this.Protection = 1;
             this._health = 1;
-            this._maxHealth = this._health;
+            this.maxHealth = this._health;
             this.Damage = (1, 2);
         }
 
-        public Entity(int attack, int protection, int health, (int Min, int Max) damageRange)
+        public Entity(int attack, int protection, int health, (int Min, int Max) damage)
         {
             this.Attack = attack;
             this.Protection = protection;
             this._health = health;
-            this._maxHealth = this._health;
-            this.Damage = damageRange;
+            this.maxHealth = this._health;
+            this.Damage = damage;
         }
 
         public virtual void getInformation()
@@ -122,9 +113,28 @@ namespace HeadsxHands
             return Health > 0;
         }
 
-        public void AttackEnemy(Entity enemy)
+        public bool AttackOpponent(Entity opponent)
         {
+            int attackModifier = Attack - opponent.Protection + 1;
+            attackModifier = Math.Max(1, attackModifier);
 
+            List<int> diceRolls = new List<int>();
+            Random rand = new Random();
+
+            for (int i = 0; i < attackModifier; i++)
+            {
+                diceRolls.Add(rand.Next(1, 7));
+            }
+
+            bool success = diceRolls.Contains(5) || diceRolls.Contains(6);
+
+            if (success)
+            {
+                int damage = rand.Next(Damage.Min, Damage.Max + 1);
+                opponent.TakeDamage(damage);
+            }
+
+            return success;
         }
 
 
@@ -133,14 +143,14 @@ namespace HeadsxHands
             if (_amountOfHealing > 0)
             {
                 this._amountOfHealing--;
-                this.Health += (int)(this._maxHealth * 0.3);
-                this.Health = Math.Min(this.Health, this._maxHealth);
+                this.Health += (int)(this.maxHealth * 0.3);
+                this.Health = Math.Min(this.Health, this.maxHealth);
             }
         }
         
         public void TakeDamage(int damage)
         {
-            Health -= damage;
+            Health = Health - damage;
         }
 
     }

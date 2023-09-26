@@ -8,6 +8,9 @@ namespace HeadsxHands
 {
     internal class Player : Entity
     {
-
+        public Player( int attack, int protection, int health, (int Min, int Max) damage)
+        : base(attack, protection, health, damage)
+        {
+        }
     }
 }
