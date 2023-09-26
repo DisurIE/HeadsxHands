@@ -85,7 +85,7 @@ namespace HeadsxHands
         {
             this.Attack = Constants.MinAttack;
             this.Protection = Constants.MinProtection;
-            this._health = Constants.StandartHealth;
+            this.Health = Constants.StandartHealth;
             this.maxHealth = this._health;
             this.Damage = (1, 2);
         }
@@ -115,6 +115,10 @@ namespace HeadsxHands
 
         public bool AttackOpponent(Entity opponent)
         {
+            if (!opponent.IsAlive()){
+                Console.WriteLine("Умер");
+                return false;
+            }
             int attackModifier = Attack - opponent.Protection + 1;
             attackModifier = Math.Max(1, attackModifier);
 
@@ -140,7 +144,7 @@ namespace HeadsxHands
 
         public void Heal()
         {
-            if (_amountOfHealing > 0)
+            if (_amountOfHealing > 0 && IsAlive())
             {
                 this._amountOfHealing--;
                 this.Health += (int)(this.maxHealth * 0.3);
@@ -150,7 +154,7 @@ namespace HeadsxHands
         
         public void TakeDamage(int damage)
         {
-            Health = Health - damage;
+            Health -= damage;
         }
 
     }
