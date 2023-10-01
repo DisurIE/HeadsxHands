@@ -8,7 +8,7 @@ namespace HeadsxHands
 {
     static class Constants
     {
-        public const int MaxHealth = 4;
+        public const int MaxAmountHeal = 4;
         public const int MinAttack = 1;
         public const int MaxAttack = 30;
         public const int MinProtection = 1;

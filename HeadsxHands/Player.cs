@@ -15,5 +15,15 @@ namespace HeadsxHands
         {
             Name = name;
         }
+
+        public override void getInformation()
+        {
+            Console.WriteLine($"{this.Name}: ");
+            Console.WriteLine($"Атака: {this.Attack}");
+            Console.WriteLine($"Защита: {this.Protection}");
+            Console.WriteLine($"Здоровье: {this.Health}");
+            Console.WriteLine($"Урон: {this.Damage}");
+        }
+
     }
 }

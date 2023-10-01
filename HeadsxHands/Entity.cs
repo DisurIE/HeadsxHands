@@ -13,8 +13,8 @@ namespace HeadsxHands
         private int _health;
         public (int Min, int Max) Damage { get; }
 
-        public readonly int maxHealth = Constants.MaxHealth;
-        private int _amountOfHealing = 4;
+        public readonly int maxHealth;
+        private int _amountOfHealing = Constants.MaxAmountHeal;
 
         public int Attack
         {
@@ -94,8 +94,8 @@ namespace HeadsxHands
         {
             this.Attack = attack;
             this.Protection = protection;
-            this._health = health;
-            this.maxHealth = this._health;
+            this.Health = health;
+            this.maxHealth = this.Health;
             this.Damage = damage;
         }
 
@@ -116,9 +116,9 @@ namespace HeadsxHands
         public bool AttackOpponent(Entity opponent)
         {
             if (!opponent.IsAlive()){
-                Console.WriteLine("Умер");
                 return false;
             }
+
             int attackModifier = Attack - opponent.Protection + 1;
             attackModifier = Math.Max(1, attackModifier);
 
