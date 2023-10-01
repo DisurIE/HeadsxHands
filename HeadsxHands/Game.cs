@@ -12,6 +12,43 @@ namespace HeadsxHands
         private Player _player = null;
         private List<Monster> _monsters = new List<Monster>();
 
+        public void Start()
+        {
+            while (true)
+            {
+                Console.WriteLine("Выберите действие: ");
+                Console.WriteLine("1. Создать Игрока");
+                Console.WriteLine("2. Создать Монстра");
+                Console.WriteLine("3. Сражение");
+                Console.WriteLine("4. Выход");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        CreatePlayer();
+                        break;
+                    case "2":
+                        CreateMonster();
+                        break;
+                    case "3":
+                        Battle();
+                        break;
+                    case "4":
+                        Console.WriteLine("Спасибо за игру!");
+                        return;
+                    default:
+                        Console.WriteLine("Некорректный выбор. Попробуйте снова.");
+                        break;
+                }
+            }
+        }
+
+        public void CreateMonster()
+        {
+        }
+
         public void CreatePlayer()
         {
             Console.WriteLine("Введите имя игрока:");
@@ -34,6 +71,12 @@ namespace HeadsxHands
 
             _player = new Player(name, attack, defense, health, (minDamage, maxDamage));
             Console.WriteLine($"{name} успешно создан!");
+            _player.getInformation();
+        }
+
+        public void Battle()
+        {
+
         }
         public string NameIsLetters()
         {
