@@ -9,7 +9,7 @@ namespace HeadsxHands
 {
     internal class Game
     {
-        private Player _player = null;
+        private Player _player;
         private List<Monster> _monsters = new List<Monster>();
 
         public void Start()
@@ -33,7 +33,7 @@ namespace HeadsxHands
                         CreateMonster();
                         break;
                     case "3":
-                        Battle();
+                        Battle(_monsters);
                         break;
                     case "4":
                         Console.WriteLine("Спасибо за игру!");
@@ -47,11 +47,12 @@ namespace HeadsxHands
 
         public void CreateMonster()
         {
+
         }
 
         public void CreatePlayer()
         {
-            Console.WriteLine("Введите имя игрока:");
+            Console.WriteLine("Введите имя игрока (латинские буквы):");
             string name = NameIsLetters();
 
             Console.WriteLine("Введите атаку игрока (1-30):");
@@ -71,10 +72,10 @@ namespace HeadsxHands
 
             _player = new Player(name, attack, defense, health, (minDamage, maxDamage));
             Console.WriteLine($"{name} успешно создан!");
-            _player.getInformation();
+            _player.PrintInformation();
         }
 
-        public void Battle()
+        public void Battle(List<Monster> monsters)
         {
 
         }

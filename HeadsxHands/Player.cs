@@ -16,7 +16,7 @@ namespace HeadsxHands
             Name = name;
         }
 
-        public override void getInformation()
+        public override void PrintInformation()
         {
             Console.WriteLine($"{this.Name}: ");
             Console.WriteLine($"Атака: {this.Attack}");

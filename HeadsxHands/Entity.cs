@@ -99,7 +99,7 @@ namespace HeadsxHands
             this.Damage = damage;
         }
 
-        public virtual void getInformation()
+        public virtual void PrintInformation()
         {
             Console.WriteLine("Существо: ");
             Console.WriteLine($"Атака: {this.Attack}");
