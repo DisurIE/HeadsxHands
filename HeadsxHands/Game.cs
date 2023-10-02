@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,8 +19,9 @@ namespace HeadsxHands
             {
                 Console.WriteLine("Выберите действие: ");
                 Console.WriteLine("1. Создать Игрока");
-                Console.WriteLine("2. Сражение");
-                Console.WriteLine("3. Выход");
+                Console.WriteLine("2. Информация о игроке");
+                Console.WriteLine("3. Сражение");
+                Console.WriteLine("4. Выход");
 
                 string choice = Console.ReadLine();
 
@@ -29,9 +31,23 @@ namespace HeadsxHands
                         CreatePlayer();
                         break;
                     case "2":
-                        Battle(_monsters);
+                        if (_player != null)
+                            _player.PrintInformation();
                         break;
                     case "3":
+                        if (_player == null)
+                        {
+                            Console.WriteLine("Создайте игрока для битвы");
+                            break;
+                        }
+                        Battle();
+                        if (_player.Health == 0)
+                        {
+                            Console.WriteLine($"{_player.Name} погиб");
+                            return;
+                        }
+                        break;
+                    case "4":
                         Console.WriteLine("Спасибо за игру!");
                         return;
                     default:
@@ -77,9 +93,60 @@ namespace HeadsxHands
             _monsters.Add(monster);
         }
 
-        public void Battle(List<Monster> monsters)
+        public void Battle()
         {
+            
+            Monster randomMonster = GetRandomMonster();
 
+            if (randomMonster == null)
+            {
+                Console.WriteLine("Не найдено монстров для битвы.");
+                return;
+            }
+
+            Console.WriteLine($"Бой с монстром: {randomMonster.Type}");
+
+            Console.WriteLine($"{_player.Name} и {randomMonster.Type} начинают сражение!");
+
+            while (_player.IsAlive() && randomMonster.IsAlive())
+            {
+                bool _playerAttackSuccess = _player.AttackOpponent(randomMonster);
+                bool monsterAttackSuccess = randomMonster.AttackOpponent(_player);
+
+                if (_playerAttackSuccess)
+                {
+                    Console.WriteLine($"{_player.Name} нанес урон {randomMonster.Type}.");
+                }
+                else
+                {
+                    Console.WriteLine($"{_player.Name} не попал по {randomMonster.Type}.");
+                }
+
+                if (monsterAttackSuccess)
+                {
+                    Console.WriteLine($"{randomMonster.Type} нанес урон {_player.Name}.");
+                }
+                else
+                {
+                    Console.WriteLine($"{randomMonster.Type} не попал по {_player.Name}.");
+                }
+
+                Console.WriteLine($"{_player.Name} здоровье: {_player.Health}");
+                Console.WriteLine($"{randomMonster.Type} здоровье: {randomMonster.Health}");
+            }
+
+            if (_player.IsAlive())
+            {
+                Console.WriteLine($"{_player.Name} победил!");
+            }
+            else if (randomMonster.IsAlive())
+            {
+                Console.WriteLine($"{randomMonster.Type} победил!");
+            }
+            else
+            {
+                Console.WriteLine("Ничья!");
+            }
         }
 
         private Monster GetRandomMonster()
