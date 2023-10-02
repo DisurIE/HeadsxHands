@@ -82,7 +82,18 @@ namespace HeadsxHands
 
         }
 
-        
+        private Monster GetRandomMonster()
+        {
+            if (_monsters.Count == 0)
+            {
+                return null;
+            }
+
+            Random random = new Random();
+            int randomIndex = random.Next(_monsters.Count);
+
+            return _monsters[randomIndex];
+        }
 
         public string NameIsLetters()
         {
