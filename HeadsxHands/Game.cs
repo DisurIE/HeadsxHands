@@ -75,6 +75,12 @@ namespace HeadsxHands
             _player.PrintInformation();
         }
 
+        public void AddMonster(string name, MonsterType type, int attack, int defense, int health, (int Min, int Max) damageRange)
+        {
+            Monster monster = new Monster(type, attack, defense, health, damageRange);
+            _monsters.Add(monster);
+        }
+
         public void Battle(List<Monster> monsters)
         {
 
