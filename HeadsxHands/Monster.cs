@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace HeadsxHands
 {
-    internal class Monster : Entity
+
+    enum MonsterType
     {
+        Goblin,
+        Dragon,
+        Zombie,
+    }
+
+    class Monster : Entity
+    {
+        public MonsterType Type { get; }
+
 
     }
 }

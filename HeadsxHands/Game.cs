@@ -10,7 +10,7 @@ namespace HeadsxHands
     internal class Game
     {
         private Player _player;
-        private List<Monster> _monsters = new List<Monster>();
+        private readonly List<Monster> _monsters = new List<Monster>();
 
         public void Start()
         {
@@ -79,6 +79,9 @@ namespace HeadsxHands
         {
 
         }
+
+        
+
         public string NameIsLetters()
         {
             string name;
