@@ -9,7 +9,7 @@ namespace HeadsxHands
 {
     internal class Game
     {
-        private Player _player;
+        private Player _player = null;
         private readonly List<Monster> _monsters = new List<Monster>();
 
         public void Start()
@@ -43,6 +43,11 @@ namespace HeadsxHands
 
         public void CreatePlayer()
         {
+            if(_player != null) 
+            {
+                Console.WriteLine("Игрок уже создан перейдите к сражениям");
+                return;
+            }
             Console.WriteLine("Введите имя игрока (латинские буквы):");
             string name = NameIsLetters();
 
