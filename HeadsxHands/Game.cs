@@ -18,9 +18,8 @@ namespace HeadsxHands
             {
                 Console.WriteLine("Выберите действие: ");
                 Console.WriteLine("1. Создать Игрока");
-                Console.WriteLine("2. Создать Монстра");
-                Console.WriteLine("3. Сражение");
-                Console.WriteLine("4. Выход");
+                Console.WriteLine("2. Сражение");
+                Console.WriteLine("3. Выход");
 
                 string choice = Console.ReadLine();
 
@@ -30,12 +29,9 @@ namespace HeadsxHands
                         CreatePlayer();
                         break;
                     case "2":
-                        CreateMonster();
-                        break;
-                    case "3":
                         Battle(_monsters);
                         break;
-                    case "4":
+                    case "3":
                         Console.WriteLine("Спасибо за игру!");
                         return;
                     default:
@@ -43,11 +39,6 @@ namespace HeadsxHands
                         break;
                 }
             }
-        }
-
-        public void CreateMonster()
-        {
-
         }
 
         public void CreatePlayer()
